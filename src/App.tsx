@@ -263,9 +263,12 @@ const ParticleBackground = ({ isPlaying }: { isPlaying: boolean }) => {
       createTargets();
     };
 
-    init();
-    window.addEventListener('resize', resize);
+    // 1. PRIMERO le damos al Canvas el tamaño real de la pantalla
     resize();
+    window.addEventListener('resize', resize);
+
+    // 2. LUEGO instanciamos las 4000 partículas para que usen la escala correcta
+    init();
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
