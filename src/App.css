@@ -386,33 +386,61 @@
 @media (max-width: 1200px) {
   .hero-container {
     flex-direction: column;
-  }
-  .hero-left {
-    padding: 3rem 2rem 1rem 2rem;
     align-items: center;
-    text-align: center;
+    justify-content: flex-start;
   }
+  
+  .hero-left, .hero-right {
+    display: contents; /* Desempaqueta las capas para ordenar a los hijos globalmente */
+  }
+
+  .hero-text {
+    order: 1;
+    text-align: center;
+    padding: 3rem 2rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
   .title { font-size: 3rem; }
   .description { max-width: 100%; }
   
   .turntable-base {
-    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.6);
-    margin-top: -80px;
+    order: 2; /* EL VINILO VA EN MEDIO (Arriba del reproductor) */
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.65);
+    margin: 20px 0 -60px -40px; /* Acercándolo visualmente */
   }
   .turntable-base:hover {
-    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.62);
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.68);
+  }
+
+  .controls-deck {
+    order: 3; /* EL REPRODUCTOR VA AL FINAL */
+    z-index: 100;
   }
 }
 
 @media (max-width: 600px) {
-  .controls-deck {
-    flex-direction: column;
-    padding: 2rem;
-    border-radius: 40px;
+  .hero-text {
+    padding: 2rem 1rem 0 1rem;
   }
+  .title { font-size: 2.2rem; }
+  
   .turntable-base {
-    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.4);
-    margin-top: -150px;
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.48);
+    margin: -30px 0 -130px -40px; /* Compensación para no verse cortado por el scale */
+  }
+  .turntable-base:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(0.5);
+  }
+  
+  .controls-deck {
+    transform: scale(0.85); /* Reducir aún más en pantallas súper pequeñas */
+    flex-direction: row; 
+    padding: 1rem 2rem;
+    border-radius: 40px;
+    margin-bottom: 2rem;
   }
 }
 

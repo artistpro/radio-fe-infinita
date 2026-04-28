@@ -391,20 +391,22 @@ function App() {
 
       {/* Left Typography Container */}
       <div className="hero-left">
-        <div className="brand">
-          <Disc3 size={18} />
-          Radio Fe Infinita
+        <div className="hero-text">
+          <div className="brand">
+            <Disc3 size={18} />
+            Radio Fe Infinita
+          </div>
+          
+          <h1 className="title">
+            Conecta tu ser,<br />
+            Renueva tu <span>Fe</span>.
+          </h1>
+          
+          <p className="description">
+            Experimenta una calidad de sonido audiófila las 24 horas del día. 
+            Alabanza majestuosa, adoración inmersiva y un mensaje continuo de esperanza en alta fidelidad.
+          </p>
         </div>
-        
-        <h1 className="title">
-          Conecta tu ser,<br />
-          Renueva tu <span>Fe</span>.
-        </h1>
-        
-        <p className="description">
-          Experimenta una calidad de sonido audiófila las 24 horas del día. 
-          Alabanza majestuosa, adoración inmersiva y un mensaje continuo de esperanza en alta fidelidad.
-        </p>
 
         <div className="controls-deck">
           <button className="btn-play" onClick={togglePlay}>
