@@ -308,8 +308,50 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Turntable Physics Refs
+  const recordRef = useRef<HTMLDivElement>(null);
+  const isPlayingRef = useRef(isPlaying);
 
   const STREAM_URL = 'https://radio.radiobt.live/listen/feinfinita/radio.mp3';
+
+  // Sincronizar estado para el motor de físicas
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  // Motor de físicas para el Vinilo (Inercia natural)
+  useEffect(() => {
+    let animationId: number;
+    let rotation = 0;
+    let velocity = 0;
+    let lastTime = performance.now();
+
+    const animate = (time: number) => {
+      const dt = (time - lastTime) / 16.66; // Normaliza a framerates variables
+      lastTime = time;
+
+      if (isPlayingRef.current) {
+        velocity += 0.03 * dt; // Acelera suave (Motor enciende)
+        if (velocity > 3.5) velocity = 3.5; // Top RPM
+      } else {
+        velocity -= 0.012 * dt; // Desacelera lento (Fricción al apagar motor)
+        if (velocity < 0) velocity = 0;
+      }
+
+      if (velocity > 0) {
+        rotation += velocity * dt;
+        if (recordRef.current) {
+          recordRef.current.style.transform = `rotate(${rotation}deg)`;
+        }
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, []);
 
   useEffect(() => {
     audioRef.current = new Audio(STREAM_URL);
@@ -390,7 +432,7 @@ function App() {
           
           <div className="platter"></div>
           
-          <div className={`record-disc ${isPlaying ? 'spin' : ''} ${!isPlaying && audioRef.current?.currentTime ? 'paused' : ''}`}>
+          <div ref={recordRef} className="record-disc">
             <div className="grooves"></div>
             <div className="reflection"></div>
             <div className="label">
