@@ -313,7 +313,7 @@ function App() {
   const recordRef = useRef<HTMLDivElement>(null);
   const isPlayingRef = useRef(isPlaying);
 
-  const STREAM_URL = 'https://radio.radiobt.live/listen/feinfinita/radio.mp3';
+  const STREAM_URL = 'https://radiobt.duckdns.org/listen/feinfinita/radio.mp3';
 
   // Sincronizar estado para el motor de físicas
   useEffect(() => {
