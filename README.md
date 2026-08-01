@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# Radio Fe Infinita 📻✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web interactiva y reproductor audiofilo de alta fidelidad para la emisora **Radio Fe Infinita** (Alabanza y Adoración 24/7).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 URLs de Producción e Infraestructura
 
-## React Compiler
+| Recurso | Enlace / Dirección | Descripción |
+| :--- | :--- | :--- |
+| **Sitio Web Oficial** | [https://radio-fe-infinita.vercel.app/](https://radio-fe-infinita.vercel.app/) | Landing Page interactiva en Vercel |
+| **Stream Audio HTTPS (Producción)** | `https://radiobt.duckdns.org/listen/feinfinita/radio.mp3` | Señal cifrada SSL (Let's Encrypt) para reproductores web y apps |
+| **Stream IP Directa (HTTP)** | `http://195.26.251.31/listen/feinfinita/radio.mp3` | Señal directa por IP |
+| **Repositorio GitHub** | [artistpro/radio-fe-infinita](https://github.com/artistpro/radio-fe-infinita) | Código fuente frontend |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📡 Detalles de la Emisora (AzuraCast VPS 1)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Servidor Streaming**: AzuraCast en Docker (VPS 1 - `195.26.251.31`).
+- **ID Estación**: `5` (`feinfinita`).
+- **Formato / Calidad**: MP3 / 192 kbps, 44.1 kHz Estéreo.
+- **Certificado SSL**: Let's Encrypt válido asignado a `radiobt.duckdns.org`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tecnologías y Características Frontend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React 18 + TypeScript + Vite**: Renderizado ultrarrápido y ligero.
+- **Motor de Físicas del Vinilo**: Simulación de inercia y aceleración de motor para el tocadiscos Hi-Fi (`App.tsx`).
+- **Canvas 2D Particle System**: Fondo de partículas dinámico y magnético reactivo a la música y cursor del usuario.
+- **HTML5 Audio API**: Manejo de stream en tiempo real con prevención de caché (`?t=timestamp`).
+- **Estilos**: Vanilla CSS moderno con efectos de Glassmorphism, neón y responsividad completa.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Desarrollo Local y Despliegue
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Requisitos Previos
+- Node.js 18+
+- npm
+
+### Comandos Principales
+
+1. **Instalar dependencias**:
+   ```bash
+   npm install
+   ```
+
+2. **Ejecutar servidor de desarrollo local**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Compilar para producción**:
+   ```bash
+   npm run build
+   ```
+
+4. **Despliegue Automático**:
+   - Cada push a la rama `main` de GitHub (`artistpro/radio-fe-infinita`) despliega automáticamente la nueva versión en Vercel.
